@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Testi Quiz</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 20px; }
+    h1 { text-align: center; }
+    .question { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .answers button { display: block; margin: 5px 0; padding: 10px; width: 100%; border: none; border-radius: 5px; cursor: pointer; background: #e9ecef; }
+    .answers button:hover { background: #dee2e6; }
+    .correct { background: #28a745 !important; color: white; }
+    .wrong { background: #dc3545 !important; color: white; }
+    .explanation { margin-top: 10px; font-size: 0.9em; color: #555; display: none; }
+    #result { font-size: 1.2em; font-weight: bold; margin-top: 20px; }
+    #finishBtn { background: #007bff; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>🧪 API Testi Quiz</h1>
+<div id="quiz"></div>
+<button id="finishBtn">Testi Bitir</button>
+<div id="result"></div>
+
+<script>
+const quizData = [
+    {q: "API testi neyi doğrular?", a: ["Uygulamanın UI tasarımını","Kullanıcının ekran tepkisini","API'nin doğru ve beklenen şekilde çalışıp çalışmadığını","Kullanıcının mobil uyumluluğunu"], correct: 2, exp: "API testi, veri akışının arka planda doğru şekilde işlenip işlenmediğini kontrol eder."},
+    {q: "REST API'de veri genellikle hangi formatta gönderilir?", a: ["HTML","JSON","CSS","XML"], correct: 1, exp: "REST API'ler genellikle JSON formatını kullanır çünkü hafif ve okunması kolaydır."},
+    {q: "Postman'de environment değişkenleri ne işe yarar?", a: ["UI tasarımını değiştirmek","Farklı ortamlar için değer saklamak","Veritabanını güncellemek","Tarayıcı önbelleğini temizlemek"], correct: 1, exp: "Environment değişkenleri testleri farklı ortamlar (dev, test, prod) için dinamik hale getirir."},
+    {q: "HTTP 200 durumu ne anlama gelir?", a: ["Yetkilendirme hatası","Kaynak bulunamadı","Başarılı istek","Sunucu hatası"], correct: 2, exp: "200 kodu, isteğin başarılı şekilde tamamlandığını belirtir."},
+    {q: "API testlerinde 'assertion' nedir?", a: ["Veritabanı yedeği","Beklenen değer kontrolü","UI buton rengi","Sunucu IP adresi"], correct: 1, exp: "Assertion, test sonucunun beklenen değer ile eşleşip eşleşmediğini kontrol eder."},
+    {q: "Bearer Token nedir?", a: ["UI öğesi","Kimlik doğrulama yöntemi","CSS özelliği","Sunucu IP adresi"], correct: 1, exp: "Bearer Token, API isteklerinde yetkilendirme için kullanılan bir güvenlik yöntemidir."},
+    {q: "HTTP 404 durumu ne anlama gelir?", a: ["Sunucu hatası","Kaynak bulunamadı","Başarılı istek","Yönlendirme"], correct: 1, exp: "404 kodu, istenen kaynağın bulunamadığını belirtir."},
+    {q: "POST isteği ne yapar?", a: ["Yeni veri oluşturur","Veri siler","Veriyi günceller","Veriyi okur"], correct: 0, exp: "POST, genellikle sunucuya yeni veri eklemek için kullanılır."},
+    {q: "API Rate Limiting ne işe yarar?", a: ["UI hızını artırır","Veri tabanını temizler","Belirli sürede yapılabilecek istek sayısını sınırlar","JSON formatını değiştirir"], correct: 2, exp: "Rate limiting, API'yi aşırı yükten korumak için istek sayısını sınırlar."},
+    {q: "Swagger nedir?", a: ["Bir API test framework'ü","API dokümantasyon aracı","Bir veritabanı","CSS framework'ü"], correct: 1, exp: "Swagger, API endpointlerini ve istek/cevap yapılarını dokümante eden bir araçtır."},
+    {q: "PUT isteği ne yapar?", a: ["Veriyi tamamen günceller","Veri siler","Yeni veri ekler","Veriyi okur"], correct: 0, exp: "PUT isteği, var olan bir kaynağı tamamen günceller."},
+    {q: "HTTP 500 durumu ne anlama gelir?", a: ["Başarılı istek","Sunucu tarafında hata","Yetkilendirme hatası","Yönlendirme"], correct: 1, exp: "500 kodu, sunucu tarafında beklenmeyen bir hata olduğunu belirtir."},
+    {q: "PATCH isteği ne yapar?", a: ["Veriyi kısmen günceller","Yeni veri ekler","Veriyi siler","Veriyi okur"], correct: 0, exp: "PATCH, var olan verinin sadece belirli alanlarını günceller."},
+    {q: "API Testinde Mock Server ne işe yarar?", a: ["Gerçek API olmadan test yapmayı sağlar","Sunucu IP'sini değiştirir","Veritabanı oluşturur","UI renklerini ayarlar"], correct: 0, exp: "Mock Server, gerçek API hazır değilken istek/cevap simülasyonu yapar."},
+    {q: "Postman'de 'Collection' nedir?", a: ["API test senaryolarının gruplandığı yer","UI butonlarının listesi","Veritabanı tablosu","Sunucu logları"], correct: 0, exp: "Collection, API testlerini bir arada tutan dosya yapısıdır."},
+    {q: "API testlerinde 'chaining' ne demektir?", a: ["UI zinciri","Testlerin birbirine veri aktarması","Veritabanı bağlantısı","HTTP kodlarının sıralaması"], correct: 1, exp: "Chaining, bir API isteğinin çıktısının diğerine girdi olarak aktarılmasıdır."},
+    {q: "Authorization Header ne işe yarar?", a: ["Kullanıcı kimliğini doğrular","UI tasarımını değiştirir","JSON formatını düzenler","Veritabanını günceller"], correct: 0, exp: "Authorization Header, API isteğinde kullanıcı kimliğini doğrulamak için kullanılır."},
+    {q: "API testi ile UI testi arasındaki temel fark nedir?", a: ["API testi görünür öğeleri kontrol eder","UI testi arka uç işlemlerini kontrol eder","API testi backend'i, UI testi arayüzü test eder","İkisi de aynı şeydir"], correct: 2, exp: "API testi backend işlevlerini kontrol eder, UI testi ise kullanıcı arayüzünü."},
+    {q: "Postman'de Test Script bölümü ne işe yarar?", a: ["CSS kodu yazmak","JavaScript ile test doğrulama yapmak","UI butonlarını renklendirmek","Veritabanı şeması oluşturmak"], correct: 1, exp: "Test Script bölümü, API cevabını JavaScript ile kontrol etmek için kullanılır."},
+    {q: "API testi neden önemlidir?", a: ["Sadece geliştiriciler için gereklidir","Uygulamanın işlevselliğini ve güvenliğini sağlar","UI tasarımını güzelleştirir","Sadece mobil uygulamalar için geçerlidir"], correct: 1, exp: "API testi, uygulamanın doğru çalışmasını, güvenliğini ve veri bütünlüğünü sağlar."}
+];
+
+let score = 0;
+
+function loadQuiz() {
+    const quizContainer = document.getElementById("quiz");
+    quizData.forEach((item, index) => {
+        const qDiv = document.createElement("div");
+        qDiv.classList.add("question");
+        qDiv.innerHTML = `<strong>${index+1}. ${item.q}</strong>`;
+        const answersDiv = document.createElement("div");
+        answersDiv.classList.add("answers");
+        item.a.forEach((answer, i) => {
+            const btn = document.createElement("button");
+            btn.innerText = answer;
+            btn.addEventListener("click", () => {
+                if (i === item.correct) {
+                    btn.classList.add("correct");
+                    score++;
+                } else {
+                    btn.classList.add("wrong");
+                }
+                Array.from(answersDiv.children).forEach(b => b.disabled = true);
+                const exp = qDiv.querySelector(".explanation");
+                exp.style.display = "block";
+            });
+            answersDiv.appendChild(btn);
+        });
+        const expDiv = document.createElement("div");
+        expDiv.classList.add("explanation");
+        expDiv.innerText = "📘 Açıklama: " + item.exp;
+        qDiv.appendChild(answersDiv);
+        qDiv.appendChild(expDiv);
+        quizContainer.appendChild(qDiv);
+    });
+}
+
+document.getElementById("finishBtn").addEventListener("click", () => {
+    document.getElementById("result").innerText = `✅ Skorun: ${score} / ${quizData.length}`;
+});
+
+loadQuiz();
+</script>
+
+</body>
+</html>
