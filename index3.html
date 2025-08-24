@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTP Status Codes Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    .quiz-container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h2 { text-align: center; }
+    .question { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
+    .options label { display: block; margin: 8px 0; cursor: pointer; }
+    .explanation { margin-top: 10px; display: none; padding: 10px; border-radius: 5px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+    button { margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; background: #007bff; color: white; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>🔐 HTTP Status Codes Quiz</h2>
+
+    <div class="question">
+      <p><b>1. "200 OK" status kodu ne anlama gelir?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q1"> a) Kaynak bulunamadı</label>
+        <label><input type="radio" name="q1"> b) İstek başarıyla işlendi</label>
+        <label><input type="radio" name="q1"> c) Yetkilendirme hatası</label>
+        <label><input type="radio" name="q1"> d) Sunucu hatası</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'API isteği doğru çalıştı ve beklenen yanıt döndü.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>2. "201 Created" hangi durumda döner?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q2"> a) Sunucu hatalı çalıştığında</label>
+        <label><input type="radio" name="q2"> b) Yeni bir kaynak başarıyla oluşturulduğunda</label>
+        <label><input type="radio" name="q2"> c) Kullanıcı kimliği yanlış olduğunda</label>
+        <label><input type="radio" name="q2"> d) Kaynak bulunamadığında</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'Genelde POST işlemleri için döner.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>3. "204 No Content" kodu neyi ifade eder?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q3"> a) Yanıtta hiç veri yok ama istek başarılı</label>
+        <label><input type="radio" name="q3"> b) Sunucu çöktü</label>
+        <label><input type="radio" name="q3"> c) Yanlış endpoint çağrıldı</label>
+        <label><input type="radio" name="q3"> d) Yanlış parametre gönderildi</label>
+      </div>
+      <button onclick="checkAnswer(this, 'a', 'Genelde DELETE isteklerinde kullanılır.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>4. "301 Moved Permanently" hangi durumda döner?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q4"> a) Kaynak geçici olarak taşındığında</label>
+        <label><input type="radio" name="q4"> b) Kaynak kalıcı olarak taşındığında</label>
+        <label><input type="radio" name="q4"> c) Kaynak silindiğinde</label>
+        <label><input type="radio" name="q4"> d) Yanlış parametre gönderildiğinde</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'Kaynak kalıcı olarak başka bir URL’e taşındı.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>5. "400 Bad Request" kodunun en yaygın nedeni nedir?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q5"> a) Yanlış HTTP metodu</label>
+        <label><input type="radio" name="q5"> b) Geçersiz veya eksik parametreler</label>
+        <label><input type="radio" name="q5"> c) Sunucu çökmesi</label>
+        <label><input type="radio" name="q5"> d) Yanlış token</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'İstemciden gelen isteğin hatalı olduğunu belirtir.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>6. "401 Unauthorized" ile "403 Forbidden" arasındaki fark nedir?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q6"> a) 401 giriş yapmadan erişim, 403 giriş yapsa da yetkisi yok</label>
+        <label><input type="radio" name="q6"> b) 401 sunucu hatası, 403 istemci hatası</label>
+        <label><input type="radio" name="q6"> c) 401 kaynak yok, 403 erişim reddi</label>
+        <label><input type="radio" name="q6"> d) İkisi aynı</label>
+      </div>
+      <button onclick="checkAnswer(this, 'a', '401 → kimlik doğrulama yok, 403 → yetki yok.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>7. "404 Not Found" hatası ne anlama gelir?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q7"> a) İstek başarılı</label>
+        <label><input type="radio" name="q7"> b) Kaynak bulunamadı</label>
+        <label><input type="radio" name="q7"> c) Yanlış yetkilendirme</label>
+        <label><input type="radio" name="q7"> d) Sunucuya ulaşılamadı</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'İstenilen endpoint veya kaynak yok.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>8. "409 Conflict" ne zaman kullanılır?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q8"> a) Çakışan istekler olduğunda</label>
+        <label><input type="radio" name="q8"> b) Sunucu yoğun olduğunda</label>
+        <label><input type="radio" name="q8"> c) Yanlış HTTP metodu kullanıldığında</label>
+        <label><input type="radio" name="q8"> d) Kaynak bulunamadığında</label>
+      </div>
+      <button onclick="checkAnswer(this, 'a', 'Genelde aynı veriyi tekrar ekleme girişiminde.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>9. "500 Internal Server Error" genelde neyi işaret eder?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q9"> a) İstemci parametreleri hatalı</label>
+        <label><input type="radio" name="q9"> b) Sunucu tarafında beklenmeyen bir hata</label>
+        <label><input type="radio" name="q9"> c) Kaynak yok</label>
+        <label><input type="radio" name="q9"> d) Kullanıcı kimliği yanlış</label>
+      </div>
+      <button onclick="checkAnswer(this, 'b', 'Backend tarafındaki kodlama veya yapılandırma hatalarıdır.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+
+    <div class="question">
+      <p><b>10. "503 Service Unavailable" ne anlama gelir?</b></p>
+      <div class="options">
+        <label><input type="radio" name="q10"> a) Sunucu bakımda veya aşırı yük altında</label>
+        <label><input type="radio" name="q10"> b) Kaynak silinmiş</label>
+        <label><input type="radio" name="q10"> c) Yetki reddedilmiş</label>
+        <label><input type="radio" name="q10"> d) Yanlış endpoint</label>
+      </div>
+      <button onclick="checkAnswer(this, 'a', 'Genelde bakım çalışmaları sırasında görülür.')">Kontrol Et</button>
+      <div class="explanation"></div>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(button, correct, explanation) {
+      const questionDiv = button.parentElement;
+      const selected = questionDiv.querySelector("input[type=radio]:checked");
+      const expDiv = questionDiv.querySelector(".explanation");
+      if (!selected) {
+        alert("Lütfen bir seçenek seçin!");
+        return;
+      }
+      if (selected.parentElement.textContent.trim().startsWith(correct)) {
+        expDiv.innerHTML = "✅ Doğru! " + explanation;
+        expDiv.className = "explanation correct";
+      } else {
+        expDiv.innerHTML = "❌ Yanlış! Doğru cevap: " + correct + ". " + explanation;
+        expDiv.className = "explanation incorrect";
+      }
+      expDiv.style.display = "block";
+    }
+  </script>
+</body>
+</html>
