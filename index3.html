@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP Durum Kodları Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f9; }
+    h1 { color: #222; text-align: center; }
+    .quiz-container { background: white; padding: 20px; border-radius: 12px; max-width: 800px; margin: auto; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .question { margin: 20px 0 10px; font-weight: bold; }
+    .options label { display: block; margin-bottom: 6px; cursor: pointer; }
+    button { margin-top: 15px; padding: 10px 18px; border: none; background: #0073e6; color: white; border-radius: 6px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #005bb5; }
+    .result { margin-top: 20px; padding: 15px; border-radius: 8px; background: #eef; }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>HTTP Durum Kodları Quiz</h1>
+    <form id="quizForm">
+      <div class="question">1. Hangi HTTP kodu başarılı bir isteği ifade eder?</div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="200"> 200 OK</label>
+        <label><input type="radio" name="q1" value="301"> 301 Kalıcı Yönlendirme</label>
+        <label><input type="radio" name="q1" value="400"> 400 Geçersiz İstek</label>
+        <label><input type="radio" name="q1" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">2. "Kaynak bulunamadı" anlamına gelen kod hangisidir?</div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="200"> 200 OK</label>
+        <label><input type="radio" name="q2" value="404"> 404 Bulunamadı</label>
+        <label><input type="radio" name="q2" value="403"> 403 Yasak</label>
+        <label><input type="radio" name="q2" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">3. Kimlik doğrulama yapılmadığında dönen kod hangisidir?</div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="200"> 200 OK</label>
+        <label><input type="radio" name="q3" value="401"> 401 Yetkisiz</label>
+        <label><input type="radio" name="q3" value="403"> 403 Yasak</label>
+        <label><input type="radio" name="q3" value="404"> 404 Bulunamadı</label>
+      </div>
+
+      <div class="question">4. Sunucu isteği anlar ama yetki vermeyi reddederse hangi kod döner?</div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="401"> 401 Yetkisiz</label>
+        <label><input type="radio" name="q4" value="403"> 403 Yasak</label>
+        <label><input type="radio" name="q4" value="404"> 404 Bulunamadı</label>
+        <label><input type="radio" name="q4" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">5. Beklenmedik bir sunucu hatası olduğunda hangi kod döner?</div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="200"> 200 OK</label>
+        <label><input type="radio" name="q5" value="301"> 301 Kalıcı Yönlendirme</label>
+        <label><input type="radio" name="q5" value="400"> 400 Geçersiz İstek</label>
+        <label><input type="radio" name="q5" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">6. Kalıcı yönlendirmeyi ifade eden kod hangisidir?</div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="200"> 200 OK</label>
+        <label><input type="radio" name="q6" value="301"> 301 Kalıcı Yönlendirme</label>
+        <label><input type="radio" name="q6" value="302"> 302 Geçici Yönlendirme</label>
+        <label><input type="radio" name="q6" value="307"> 307 Geçici Yönlendirme</label>
+      </div>
+
+      <div class="question">7. İstemci hatası (ör. yanlış sözdizimi) olduğunda dönen kod hangisidir?</div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="200"> 200 OK</label>
+        <label><input type="radio" name="q7" value="400"> 400 Geçersiz İstek</label>
+        <label><input type="radio" name="q7" value="401"> 401 Yetkisiz</label>
+        <label><input type="radio" name="q7" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">8. Kaynağın desteklemediği bir HTTP metodu kullanıldığında hangi kod döner?</div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="403"> 403 Yasak</label>
+        <label><input type="radio" name="q8" value="404"> 404 Bulunamadı</label>
+        <label><input type="radio" name="q8" value="405"> 405 Metot İzin Verilmiyor</label>
+        <label><input type="radio" name="q8" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <div class="question">9. İstek geçerli ama sunucu işlemi reddediyorsa hangi kod döner?</div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="401"> 401 Yetkisiz</label>
+        <label><input type="radio" name="q9" value="403"> 403 Yasak</label>
+        <label><input type="radio" name="q9" value="404"> 404 Bulunamadı</label>
+        <label><input type="radio" name="q9" value="410"> 410 Kalıcı Olarak Silindi</label>
+      </div>
+
+      <div class="question">10. İstenen kaynak artık mevcut değilse ve tekrar sunulmayacaksa hangi kod döner?</div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="301"> 301 Kalıcı Yönlendirme</label>
+        <label><input type="radio" name="q10" value="404"> 404 Bulunamadı</label>
+        <label><input type="radio" name="q10" value="410"> 410 Kalıcı Olarak Silindi</label>
+        <label><input type="radio" name="q10" value="500"> 500 Sunucu Hatası</label>
+      </div>
+
+      <button type="button" onclick="checkAnswers()">Gönder</button>
+    </form>
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    const answers = {
+      q1: "200",
+      q2: "404",
+      q3: "401",
+      q4: "403",
+      q5: "500",
+      q6: "301",
+      q7: "400",
+      q8: "405",
+      q9: "403",
+      q10: "410"
+    };
+
+    const explanations = {
+      q1: "200 OK, isteğin başarıyla tamamlandığını gösterir.",
+      q2: "404 Bulunamadı, kaynağın sunucuda olmadığını belirtir.",
+      q3: "401 Yetkisiz, kimlik doğrulama gerektiğini gösterir.",
+      q4: "403 Yasak, sunucunun isteği anladığını ama yetki vermediğini gösterir.",
+      q5: "500 Sunucu Hatası, beklenmedik bir hata olduğunu belirtir.",
+      q6: "301 Kalıcı Yönlendirme, kaynağın kalıcı olarak başka bir URI'ye taşındığını belirtir.",
+      q7: "400 Geçersiz İstek, istemci hatası nedeniyle işlenemeyen isteği gösterir.",
+      q8: "405 Metot İzin Verilmiyor, HTTP metodunun kaynak tarafından desteklenmediğini gösterir.",
+      q9: "403 Yasak, geçerli isteğe rağmen sunucunun işlem yapmayı reddettiğini belirtir.",
+      q10: "410 Kalıcı Olarak Silindi, kaynağın kalıcı olarak kaldırıldığını gösterir."
+    };
+
+    function checkAnswers() {
+      let score = 0;
+      let feedback = "";
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected) {
+          if (selected.value === answers[q]) {
+            score++;
+            feedback += `<p><b>${q}</b>: ✅ Doğru! - ${explanations[q]}</p>`;
+          } else {
+            feedback += `<p><b>${q}</b>: ❌ Yanlış. - ${explanations[q]}</p>`;
+          }
+        } else {
+          feedback += `<p><b>${q}</b>: ❌ Cevap verilmedi. - ${explanations[q]}</p>`;
+        }
+      }
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").innerHTML = `<h3>Puanınız: ${score}/10</h3>` + feedback;
+    }
+  </script>
+</body>
+</html>
